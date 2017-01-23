@@ -25,7 +25,7 @@ for i,deviceValue in pairs(otherdevices) do
         if (difference > timeon and difference < (timeon + 60) and turn_off[groupName] ~= false) then
             turn_off[groupName] = true
         else
-            print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. timeon + 60)
+            print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. (timeon + 60))
             turn_off[groupName] = false
         end
     end
