@@ -22,20 +22,20 @@ for deviceName,deviceValue in pairs(devicechanged) do
                 print ('[' .. name .. '] On')
                 commandArray['Group:' .. name .. 'Regular'] = 'On'
             end
-        elseif (deviceValue == 'Off' and otherdevices[name] ~= 'Off') then
-            allPIRsOff = true
-            for pirName,pirValue in pairs(otherdevices) do
-                if (pirName:sub(0,3) == 'PIR' and pirName:sub(5) == name and pirValue ~= 'Off') then
-                    allPIRsOff = false
-                end
-            end
-            if (allPIRsOff == true) then
-                print ('[' .. name .. '] All PIRs off, turning off lights')
-                commandArray['Group:' .. name .. 'Regular'] = 'Off'
-                commandArray['Group:' .. name .. 'Dim'] = 'Off'
-            else
-                print ('[' .. name .. '] Other PIR(s) not off, waiting...')
-            end
+        -- elseif (deviceValue == 'Off' and otherdevices[name] ~= 'Off') then
+        --     allPIRsOff = true
+        --     for pirName,pirValue in pairs(otherdevices) do
+        --         if (pirName:sub(0,3) == 'PIR' and pirName:sub(5) == name and pirValue ~= 'Off') then
+        --             allPIRsOff = false
+        --         end
+        --     end
+        --     if (allPIRsOff == true) then
+        --         print ('[' .. name .. '] All PIRs off, turning off lights')
+        --         commandArray['Group:' .. name .. 'Regular'] = 'Off'
+        --         commandArray['Group:' .. name .. 'Dim'] = 'Off'
+        --     else
+        --         print ('[' .. name .. '] Other PIR(s) not off, waiting...')
+        --     end
         end
     end
 end

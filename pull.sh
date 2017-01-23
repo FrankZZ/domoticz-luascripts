@@ -2,7 +2,7 @@
 set -ex
 
 if ! [ -x "$(command -v git)" ]; then
-  apt-get update
+  sudo apt-get update
   apt-get -y install git
 fi
 
