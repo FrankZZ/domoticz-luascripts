@@ -20,7 +20,7 @@ for i,deviceValue in pairs(otherdevices) do
     type = deviceName:sub(0,3)
     id = deviceName:sub(4,4)
     groupName = deviceName:sub(5)
-    if (type == 'PIR') then
+    if (type == 'PIR' and deviceValue == 'Off') then
         difference = timedifference(otherdevices_lastupdate[deviceName])
         if (difference > timeon and difference < (timeon + 60) and turn_off[groupName] ~= false) then
             turn_off[groupName] = true
