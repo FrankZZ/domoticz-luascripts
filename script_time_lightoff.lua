@@ -21,12 +21,14 @@ for i,deviceValue in pairs(otherdevices) do
     id = deviceName:sub(4,4)
     groupName = deviceName:sub(5)
     if (type == 'PIR') then
-        difference = timedifference(otherdevices_lastupdate[deviceName])
-        if (difference > timeon and difference < (timeon + 60) and turn_off[groupName] ~= false and otherdevices[groupName] ~= 'Off') then
-            turn_off[groupName] = true
-        else
-            print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. (timeon + 60))
-            turn_off[groupName] = false
+        if (otherdevices[groupName] ~= 'Off') then
+            difference = timedifference(otherdevices_lastupdate[deviceName])
+            if (difference > timeon and difference < (timeon + 60) and turn_off[groupName] ~= false) then
+                turn_off[groupName] = true
+            else
+                print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. (timeon + 60))
+                turn_off[groupName] = false
+            end
         end
     end
 end
