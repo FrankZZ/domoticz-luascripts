@@ -23,7 +23,7 @@ for i,deviceValue in pairs(otherdevices) do
 
     if (type == 'PIR') then
         if (otherdevices[groupName] ~= 'Off') then
-            if (groupName == 'Huiskamer' and otherdevices['Huiskamertemperatuur'] >= 19) then
+            if (groupName == 'Huiskamer' and tonumber(otherdevices['Huiskamertemperatuur']) >= 19) then
                 print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: 19.0')
             end
             difference = timedifference(otherdevices_lastupdate[deviceName])
