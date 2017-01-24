@@ -1,5 +1,6 @@
-timeon = 900
-minHuiskamerTemp = 19.2
+timeon = uservariables['minTimeOn']
+minHuiskamerTemp = uservariables['minHuiskamerTemp']
+
 function timedifference(s)
     year = string.sub(s, 1, 4)
     month = string.sub(s, 6, 7)
@@ -33,8 +34,8 @@ for i,deviceValue in pairs(otherdevices) do
             end
             -- Huiskamerlampen should stay on when someone's in the room. Let's check temperature for that
             if (groupName == 'Huiskamer') then
-                print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: 19.2')
-                if (tonumber(otherdevices['Huiskamertemperatuur']) >= 19.2) then
+                print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: ' .. minHuiskamerTemp)
+                if (tonumber(otherdevices['Huiskamertemperatuur']) >= minHuiskamerTemp) then
                     groupLastOff[groupName] = nil
                 end
             end
