@@ -1,4 +1,5 @@
 timeon = 900
+minHuiskamerTemp = 19.2
 function timedifference(s)
     year = string.sub(s, 1, 4)
     month = string.sub(s, 6, 7)
@@ -26,8 +27,11 @@ for i,deviceValue in pairs(otherdevices) do
             difference = timedifference(otherdevices_lastupdate[deviceName])
             print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. timeon)
             if (groupLastOff[groupName] == nil or difference < groupLastOff[groupName]) then
+                -- This PIR was not logged before with a lower lastupdate value. Put it in the table.
+                -- So we can compare the PIR that was turned off last to the treshold.
                 groupLastOff[groupName] = difference
             end
+            -- Huiskamerlampen should stay on when someone's in the room. Let's check temperature for that
             if (groupName == 'Huiskamer') then
                 print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: 19.2')
                 if (tonumber(otherdevices['Huiskamertemperatuur']) >= 19.2) then
@@ -39,6 +43,9 @@ for i,deviceValue in pairs(otherdevices) do
 end
 
 for groupName,difference in pairs(groupLastOff) do
+    -- Check all groups that the last PIR that was turned off is out of the treshold
+    -- Note: Only groups that are currently on are in the table, 
+    -- we don't need to turn off a group that's already off ;-)
     if (difference > timeon) then
         print ('[' .. groupName .. '] All PIRs off for atleast ' .. timeon .. ' seconds, turning off lights')
         commandArray['Group:' .. groupName .. 'Regular'] = 'Off'
