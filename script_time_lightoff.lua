@@ -29,8 +29,8 @@ for i,deviceValue in pairs(otherdevices) do
                 groupLastOff[groupName] = difference
             end
             if (groupName == 'Huiskamer') then
-                print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: 19.0')
-                if (tonumber(otherdevices['Huiskamertemperatuur']) >= 19) then
+                print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: 19.5')
+                if (tonumber(otherdevices['Huiskamertemperatuur']) >= 19.5) then
                     groupLastOff[groupName] = nil
                 end
             end
