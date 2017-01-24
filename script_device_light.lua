@@ -13,7 +13,7 @@ for deviceName,deviceValue in pairs(devicechanged) do
     id = deviceName:sub(4,4)
     name = deviceName:sub(5)
     if (type == 'PIR') then
-        print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]))
+        print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]) .. ' - ' .. tostring(otherdevices_svalues[name]))
         if (deviceValue == 'On' and otherdevices[name] == 'Off') then
             if (sleeptime) then
                 print ('[' .. name .. ']On dim')
