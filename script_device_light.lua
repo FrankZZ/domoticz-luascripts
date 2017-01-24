@@ -16,7 +16,7 @@ for deviceName,deviceValue in pairs(devicechanged) do
         print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]) .. ' - ' .. tostring(otherdevices_svalues[name]))
         if (deviceValue == 'On' and otherdevices[name] == 'Off') then
             if (sleeptime) then
-                print ('[' .. name .. ']On dim')
+                print ('[' .. name .. '] On dim')
                 commandArray['Group:' .. name .. 'Dim'] = 'On'
             elseif (night) then
                 print ('[' .. name .. '] On')
