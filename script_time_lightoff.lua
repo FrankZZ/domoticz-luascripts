@@ -1,4 +1,4 @@
-timeon = 240
+timeon = 900
 function timedifference(s)
     year = string.sub(s, 1, 4)
     month = string.sub(s, 6, 7)
@@ -13,28 +13,27 @@ function timedifference(s)
 end
 
 commandArray = {}
-turn_off = {}
+groupLastOff = {}
 
 for i,deviceValue in pairs(otherdevices) do
     deviceName = tostring(i)
     type = deviceName:sub(0,3)
     id = deviceName:sub(4,4)
     groupName = deviceName:sub(5)
+
     if (type == 'PIR') then
         if (otherdevices[groupName] ~= 'Off') then
             difference = timedifference(otherdevices_lastupdate[deviceName])
-            if (difference > timeon and difference < (timeon + 60) and turn_off[groupName] ~= false) then
-                turn_off[groupName] = true
-            else
-                print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. (timeon + 60))
-                turn_off[groupName] = false
+            print ('[' .. groupName .. '] PIR ' .. id .. ' is off for ' .. difference .. ' seconds. Treshold: ' .. timeon)
+            if (groupLastOff[groupName] == nil or difference < groupLastOff[groupName]) then
+                groupLastOff[groupName] = difference
             end
         end
     end
 end
 
-for groupName,turnOff in pairs(turn_off) do
-    if (turnOff == true) then
+for groupName,difference in pairs(groupLastOff) do
+    if (difference > timeon) then
         print ('[' .. groupName .. '] All PIRs off for atleast ' .. timeon .. ' seconds, turning off lights')
         commandArray['Group:' .. groupName .. 'Regular'] = 'Off'
         commandArray['Group:' .. groupName .. 'Dim'] = 'Off'
