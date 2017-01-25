@@ -1,7 +1,7 @@
 time = os.date("*t")
 minutesnow = time.min + time.hour * 60
 sunset = minutesnow > timeofday['SunsetInMinutes'] - 30
-sunrising = minutesnow < timeofday['SunriseInMinutes'] + 60
+sunrising = minutesnow < timeofday['SunriseInMinutes'] + 120
 --sunset = true
 night = sunset or timeofday['Nighttime'] or sunrising
 sleeptime = time.hour >= 0 and time.hour <= 5
