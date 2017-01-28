@@ -1,4 +1,5 @@
 timeon = uservariables['minTimeOn']
+minutesnow = time.min + time.hour * 60
 minHuiskamerTemp = uservariables['minHuiskamerTemp']
 time = os.date("*t")
 sunset = minutesnow > timeofday['SunsetInMinutes'] - 30
