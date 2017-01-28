@@ -40,7 +40,7 @@ for i,deviceValue in pairs(otherdevices) do
                 groupLastOff[groupName] = difference
             end
             -- Huiskamerlampen should stay on when someone's in the room. Let's check temperature for that
-            if (night and groupName == 'Huiskamer') then
+            if (groupName == 'Huiskamer') then
                 print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: ' .. minHuiskamerTemp)
                 if (tonumber(otherdevices['Huiskamertemperatuur']) >= minHuiskamerTemp) then
                     groupLastOff[groupName] = nil
