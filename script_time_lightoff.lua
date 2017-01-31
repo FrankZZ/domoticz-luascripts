@@ -40,7 +40,7 @@ for i,deviceValue in pairs(otherdevices) do
                 groupLastOff[groupName] = difference
             end
             -- Huiskamerlampen should stay on when someone's in the room. Let's check temperature for that
-            if (groupName == 'Huiskamer') then
+            if (night == true and groupName == 'Huiskamer') then
                 print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: ' .. minHuiskamerTemp)
                 if (tonumber(otherdevices['Huiskamertemperatuur']) >= minHuiskamerTemp) then
                     groupLastOff[groupName] = nil
@@ -54,11 +54,7 @@ for groupName,difference in pairs(groupLastOff) do
     -- Check all groups that the last PIR that was turned off is out of the treshold
     -- Note: Only groups that are currently on are in the table, 
     -- we don't need to turn off a group that's already off ;-)
-    if (night == false) then
-        print ('[' .. groupName .. '] it\'s not night anymore, turning off lights')
-        commandArray['Group:' .. groupName .. 'Regular'] = 'Off'
-        commandArray['Group:' .. groupName .. 'Dim'] = 'Off'
-    elseif (difference > timeon) then
+    if (difference > timeon) then
         print ('[' .. groupName .. '] All PIRs off for atleast ' .. timeon .. ' seconds, turning off lights')
         commandArray['Group:' .. groupName .. 'Regular'] = 'Off'
         commandArray['Group:' .. groupName .. 'Dim'] = 'Off'
