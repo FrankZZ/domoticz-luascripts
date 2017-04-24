@@ -13,29 +13,19 @@ for deviceName,deviceValue in pairs(devicechanged) do
     id = deviceName:sub(4,4)
     name = deviceName:sub(5)
     if (type == 'PIR') then
-        print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]) .. ' - ' .. tostring(otherdevices_svalues[name]))
-        if (deviceValue == 'On' and otherdevices[name] == 'Off') then
-            if (sleeptime) then
-                print ('[' .. name .. '] On dim')
-                commandArray['Group:' .. name .. 'Dim'] = 'On'
-            elseif (night) then
-                print ('[' .. name .. '] On')
-                commandArray['Group:' .. name .. 'Regular'] = 'On'
+        if(otherdevices[name .. 'Force' == 'On']) then
+            print ('[' .. name .. '] Is forced on, not doing anything...')
+        else
+            print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]) .. ' - ' .. tostring(otherdevices_svalues[name]))
+            if (deviceValue == 'On' and otherdevices[name] == 'Off') then
+                if (sleeptime) then
+                    print ('[' .. name .. '] On dim')
+                    commandArray['Group:' .. name .. 'Dim'] = 'On'
+                elseif (night) then
+                    print ('[' .. name .. '] On')
+                    commandArray['Group:' .. name .. 'Regular'] = 'On'
+                end
             end
-        -- elseif (deviceValue == 'Off' and otherdevices[name] ~= 'Off') then
-        --     allPIRsOff = true
-        --     for pirName,pirValue in pairs(otherdevices) do
-        --         if (pirName:sub(0,3) == 'PIR' and pirName:sub(5) == name and pirValue ~= 'Off') then
-        --             allPIRsOff = false
-        --         end
-        --     end
-        --     if (allPIRsOff == true) then
-        --         print ('[' .. name .. '] All PIRs off, turning off lights')
-        --         commandArray['Group:' .. name .. 'Regular'] = 'Off'
-        --         commandArray['Group:' .. name .. 'Dim'] = 'Off'
-        --     else
-        --         print ('[' .. name .. '] Other PIR(s) not off, waiting...')
-        --     end
         end
     end
 end

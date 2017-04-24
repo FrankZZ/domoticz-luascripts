@@ -51,10 +51,12 @@ for i,deviceValue in pairs(otherdevices) do
 end
 
 for groupName,difference in pairs(groupLastOff) do
+    if (otherdevices[groupName .. 'Force'] == 'On') then
+        print ('[' .. groupName .. '] Forced on, not turning off...')
     -- Check all groups that the last PIR that was turned off is out of the treshold
     -- Note: Only groups that are currently on are in the table, 
     -- we don't need to turn off a group that's already off ;-)
-    if (difference > timeon) then
+    elseif (difference > timeon) then
         print ('[' .. groupName .. '] All PIRs off for atleast ' .. timeon .. ' seconds, turning off lights')
         commandArray['Group:' .. groupName .. 'Regular'] = 'Off'
         commandArray['Group:' .. groupName .. 'Dim'] = 'Off'
