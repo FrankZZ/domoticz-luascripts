@@ -5,7 +5,10 @@ sunrising = minutesnow < timeofday['SunriseInMinutes'] + 120
 --sunset = true
 night = sunset or timeofday['Nighttime'] or sunrising
 sleeptime = time.hour >= 22 or time.hour <= 5
-sunisdark = tonumber(otherdevices['UVWeerstation']) < uservariables['minSunlight']
+
+sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
+sunisdark = tonumber(sUV) < uservariables['minSunlight']
+
 --sleeptime = true
 
 commandArray = {}
