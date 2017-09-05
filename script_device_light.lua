@@ -5,6 +5,7 @@ sunrising = minutesnow < timeofday['SunriseInMinutes'] + 120
 --sunset = true
 night = sunset or timeofday['Nighttime'] or sunrising
 sleeptime = time.hour >= 22 or time.hour <= 5
+sunisdark = otherdevices['UV2Weerstation'] < uservariables['minSunlight']
 --sleeptime = true
 
 commandArray = {}
@@ -16,12 +17,12 @@ for deviceName,deviceValue in pairs(devicechanged) do
         if(otherdevices[name .. 'Force' == 'On']) then
             print ('[' .. name .. '] Is forced on, not doing anything...')
         else
-            print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]) .. ' - ' .. tostring(otherdevices_svalues[name]))
+            print ('[' .. name .. '] ' .. deviceName .. ' changed to ' .. deviceValue .. ' Id: ' .. id .. ' SunisDark: ' .. tostring(sunisdark) .. ' Night: ' .. tostring(night) .. ' Sunset: ' .. tostring(sunset) .. ' ' .. name .. ': ' .. tostring(otherdevices[name]) .. ' - ' .. tostring(otherdevices_svalues[name]))
             if (deviceValue == 'On' and otherdevices[name] == 'Off') then
                 if (sleeptime) then
                     print ('[' .. name .. '] On dim')
                     commandArray['Group:' .. name .. 'Dim'] = 'On'
-                elseif (night) then
+                elseif (night or sunisdark) then
                     print ('[' .. name .. '] On')
                     commandArray['Group:' .. name .. 'Regular'] = 'On'
                 end
