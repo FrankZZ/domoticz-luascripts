@@ -17,6 +17,7 @@ for deviceName,deviceValue in pairs(otherdevices) do
     id = deviceName:sub(4,4)
     name = deviceName:sub(5)
     if (type == 'PIR' and id == '0') then
+        print ('lightintensity: ' .. name .. ': ' .. tostring(otherdevices[name]) .. '. sleeptime: ' .. tostring(sleeptime) .. ' Dim: ' .. otherdevices['Group:' .. name .. 'Dim'] .. ' Regular: ' .. otherdevices['Group:' .. name .. 'Regular'])
         if(otherdevices[name .. 'Force' == 'On']) then
             print ('[' .. name .. '] Is forced on, not doing anything...')
         else
