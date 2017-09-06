@@ -20,7 +20,7 @@ for deviceName,deviceValue in pairs(otherdevices) do
         if(otherdevices[name .. 'Force' == 'On']) then
             print ('[' .. name .. '] Is forced on, not doing anything...')
         else
-            if (deviceValue == 'On' and otherdevices[name] == 'Off') then
+            if (otherdevices[name] ~= 'Off') then
                 if (sleeptime and otherdevices['Group:' .. name .. 'Regular'] == 'On') then
                     print ('[' .. name .. '] It\'s sleeptime and light was on Regular, change to dim')
 
