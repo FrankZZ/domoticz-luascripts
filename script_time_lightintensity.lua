@@ -12,7 +12,7 @@ sunisdark = tonumber(sUV) < uservariables['minSunlight']
 --sleeptime = true
 
 commandArray = {}
-for deviceName,deviceValue in pairs(devicechanged) do
+for deviceName,deviceValue in pairs(otherdevices) do
     type = deviceName:sub(0,3)
     id = deviceName:sub(4,4)
     name = deviceName:sub(5)
