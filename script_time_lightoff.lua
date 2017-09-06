@@ -4,6 +4,10 @@ minutesnow = time.min + time.hour * 60
 minHuiskamerTemp = uservariables['minHuiskamerTemp']
 sunset = minutesnow > timeofday['SunsetInMinutes'] - 30
 sunrising = minutesnow < timeofday['SunriseInMinutes'] + 90
+
+sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
+sunisdark = tonumber(sUV) < uservariables['minSunlight']
+
 --sunset = true
 night = sunset or timeofday['Nighttime'] or sunrising
 sleeptime = time.hour >= 0 and time.hour <= 5
@@ -40,7 +44,7 @@ for i,deviceValue in pairs(otherdevices) do
                 groupLastOff[groupName] = difference
             end
             -- Huiskamerlampen should stay on when someone's in the room. Let's check temperature for that
-            if (night == true and sleeptime == false and groupName == 'Huiskamer') then
+            if ((sunisdark == true or night == true) and sleeptime == false and groupName == 'Huiskamer') then
                 print ('[' .. groupName .. '] Temperature is ' .. otherdevices['Huiskamertemperatuur'] .. ' Min treshold: ' .. minHuiskamerTemp)
                 if (tonumber(otherdevices['Huiskamertemperatuur']) >= minHuiskamerTemp) then
                     groupLastOff[groupName] = nil
