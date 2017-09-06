@@ -31,17 +31,17 @@ for deviceName,deviceValue in pairs(otherdevices) do
     id = deviceName:sub(4,4)
     name = deviceName:sub(5)
     if (type == 'PIR' and id == '0') then
-        print ('lightintensity: ' .. name .. ': ' .. tostring(otherdevices[name]) .. '. sleeptime: ' .. tostring(sleeptime) .. ' Group:' .. name .. 'Dim: ' .. tostring(otherdevices['Group:' .. name .. 'Dim']) .. ' ' .. 'Group:' .. name .. 'Regular: ' .. tostring(otherdevices['Group:' .. name .. 'Regular']))
+        print ('lightintensity: ' .. name .. ': ' .. tostring(otherdevices[name]) .. '. sleeptime: ' .. tostring(sleeptime) .. ' ' .. name .. 'Dim: ' .. tostring(otherdevices_scenesgroups[name .. 'Dim']) .. ' ' .. name .. 'Regular: ' .. tostring(otherdevices_scenesgroups[name .. 'Regular']))
         if(otherdevices[name .. 'Force' == 'On']) then
             print ('[' .. name .. '] Is forced on, not doing anything...')
         else
             if (otherdevices[name] ~= 'Off') then
-                if (sleeptime and otherdevices['Group:' .. name .. 'Regular'] == 'On') then
+                if (sleeptime and otherdevices_scenesgroups[name .. 'Regular'] == 'On') then
                     print ('[' .. name .. '] It\'s sleeptime and light was on Regular, change to dim')
 
                     table.insert(commandArray, {['Group:' .. name .. 'Regular'] = 'Off' })
                     table.insert(commandArray, {['Group:' .. name .. 'Dim'] = 'On'})
-                elseif (otherdevices['Group:' .. name .. 'Dim'] == 'On' and not sleeptime) then
+                elseif (otherdevices_scenesgroups[name .. 'Dim'] == 'On' and not sleeptime) then
                     print ('[' .. name .. '] Sleeptime ended and light was dim, change to Regular')
 
                     table.insert(commandArray, {['Group:' .. name .. 'Dim'] = 'Off'})
