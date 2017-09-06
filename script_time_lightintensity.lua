@@ -41,7 +41,7 @@ for deviceName,deviceValue in pairs(otherdevices) do
 
                     table.insert(commandArray, {['Group:' .. name .. 'Regular'] = 'Off' })
                     table.insert(commandArray, {['Group:' .. name .. 'Dim'] = 'On'})
-                elseif (otherdevices_scenesgroups['Group:' .. name .. 'Dim'] == 'On' and not sleeptime) then
+                elseif (otherdevices_scenesgroups[name .. 'Dim'] == 'On' and not sleeptime) then
                     print ('[' .. name .. '] Sleeptime ended and light was dim, change to Regular')
 
                     table.insert(commandArray, {['Group:' .. name .. 'Dim'] = 'Off'})
