@@ -31,8 +31,8 @@ for deviceName,deviceValue in pairs(otherdevices) do
     id = deviceName:sub(4,4)
     name = deviceName:sub(5)
     if (type == 'PIR' and id == '0') then
-        print ('lightintensity: ' .. name .. ': ' .. tostring(otherdevices[name]) .. '. sleeptime: ' .. tostring(sleeptime) .. ' ' .. name .. 'Dim: ' .. tostring(otherdevices_scenesgroups[name .. 'Dim']) .. ' ' .. name .. 'Regular: ' .. tostring(otherdevices_scenesgroups[name .. 'Regular']))
-        if(otherdevices[name .. 'Force' == 'On']) then
+        print ('lightintensity: ' .. name .. ': ' .. tostring(otherdevices[name]) .. '. sleeptime: ' .. tostring(sleeptime) .. ' ' .. name .. 'Dim: ' .. tostring(otherdevices_scenesgroups[name .. 'Dim']) .. ' ' .. name .. 'Regular: ' .. tostring(otherdevices_scenesgroups[name .. 'Regular']) .. ' Force: ' .. tostring(otherdevices[name .. 'Force']))
+        if(tostring(otherdevices[name .. 'Force']) == 'On') then
             print ('[' .. name .. '] Is forced on, not doing anything...')
         else
             if (otherdevices[name] ~= 'Off') then
