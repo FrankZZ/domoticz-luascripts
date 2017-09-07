@@ -4,7 +4,7 @@ sunset = minutesnow > timeofday['SunsetInMinutes'] - 30
 sunrising = minutesnow < timeofday['SunriseInMinutes'] + 120
 --sunset = true
 night = sunset or timeofday['Nighttime'] or sunrising
-sleeptime = time.hour >= 22 or time.hour <= 5
+sleeptime = time.hour >= uservariables['sleepTimeStartHour'] or time.hour < uservariables['sleepTimeStopHour']
 
 sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
 sunisdark = tonumber(sUV) < uservariables['minSunlight']
