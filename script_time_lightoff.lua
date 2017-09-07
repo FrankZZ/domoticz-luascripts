@@ -1,4 +1,6 @@
 timeon = uservariables['minTimeOn']
+forcetimeout = uservariables['forceLightTimeout']
+
 time = os.date("*t")
 minutesnow = time.min + time.hour * 60
 minHuiskamerTemp = uservariables['minHuiskamerTemp']
@@ -56,9 +58,14 @@ end
 
 for groupName,difference in pairs(groupLastOff) do
     if (otherdevices[groupName .. 'Force'] == 'On') then
-        print ('[' .. groupName .. '] Forced on, not turning off...')
+        if (timedifference(otherdevices_lastupdate[groupName .. 'Force']) > forcetimeout) then
+            commandArray[groupName .. 'Force'] = 'Off'
+            print ('[' .. groupName .. '] Forced on, turning off because of forceTimeout...')
+        else
+            print ('[' .. groupName .. '] Forced on, not turning off...')
+        end
     -- Check all groups that the last PIR that was turned off is out of the treshold
-    -- Note: Only groups that are currently on are in the table, 
+    -- Note: Only groups that are currently on are in the table,
     -- we don't need to turn off a group that's already off ;-)
     elseif (difference > timeon) then
         print ('[' .. groupName .. '] All PIRs off for atleast ' .. timeon .. ' seconds, turning off lights')
