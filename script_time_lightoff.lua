@@ -58,6 +58,7 @@ end
 
 for groupName,difference in pairs(groupLastOff) do
     if (otherdevices[groupName .. 'Force'] == 'On') then
+        print ('lastupdate force: ' .. timedifference(otherdevices_lastupdate[groupName .. 'Force']) .. ' time ' .. tostring(otherdevices_lastupdate[groupName .. 'Force']))
         if (timedifference(otherdevices_lastupdate[groupName .. 'Force']) > forcetimeout) then
             commandArray[groupName .. 'Force'] = 'Off'
             print ('[' .. groupName .. '] Forced on, turning off because of forceTimeout...')
