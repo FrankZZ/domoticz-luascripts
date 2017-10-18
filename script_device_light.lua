@@ -25,7 +25,7 @@ for deviceName,deviceValue in pairs(devicechanged) do
                 if (sleeptime) then
                     print ('[' .. name .. '] On dim')
                     commandArray['Group:' .. name .. 'Dim'] = 'On'
-                elseif (night or sunisdark) then
+                elseif (night or (sunisdark and name ~= 'Huiskamer')) then
                     print ('[' .. name .. '] On')
                     commandArray['Group:' .. name .. 'Regular'] = 'On'
                 end
