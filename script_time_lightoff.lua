@@ -4,7 +4,7 @@ forcetimeout = uservariables['forceLightTimeout']
 time = os.date("*t")
 minutesnow = time.min + time.hour * 60
 minHuiskamerTemp = uservariables['minHuiskamerTemp']
-sunset = minutesnow > timeofday['SunsetInMinutes'] - 30
+sunset = minutesnow > timeofday['SunsetInMinutes'] - 60
 sunrising = minutesnow < timeofday['SunriseInMinutes'] + 90
 
 sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
