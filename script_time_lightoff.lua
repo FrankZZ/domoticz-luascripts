@@ -5,7 +5,7 @@ time = os.date("*t")
 minutesnow = time.min + time.hour * 60
 minHuiskamerTemp = uservariables['minHuiskamerTemp']
 sunset = minutesnow > timeofday['SunsetInMinutes'] - 60
-sunrising = minutesnow < timeofday['SunriseInMinutes'] + 90
+sunrising = minutesnow < timeofday['SunriseInMinutes'] + 120
 
 sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
 sunisdark = tonumber(sUV) < uservariables['minSunlight']
