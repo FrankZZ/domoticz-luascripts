@@ -7,7 +7,8 @@ night = sunset or timeofday['Nighttime'] or sunrising
 sleeptime = time.hour >= uservariables['sleepTimeStartHour'] or time.hour < uservariables['sleepTimeStopHour']
 
 sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
-sunisdark = tonumber(sUV) < uservariables['minSunlight']
+sUV2 = otherdevices_svalues['UV2Weerstation']
+sunisdark = sUV2 < uservariables['minSunlight']
 
 --sleeptime = true
 
@@ -25,7 +26,7 @@ for deviceName,deviceValue in pairs(devicechanged) do
                 if (sleeptime) then
                     print ('[' .. name .. '] On dim')
                     commandArray['Group:' .. name .. 'Dim'] = 'On'
-                elseif (night or (sunisdark and (name ~= 'Huiskamer' or tonumber(sUV) == 0.0))) then
+                elseif (night or (sunisdark and (name ~= 'Huiskamer' or sUV2 == 0.0))) then
                     print ('[' .. name .. '] On')
                     commandArray['Group:' .. name .. 'Regular'] = 'On'
                 end
