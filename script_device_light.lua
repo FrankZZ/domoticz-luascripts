@@ -7,7 +7,7 @@ night = sunset or timeofday['Nighttime'] or sunrising
 sleeptime = time.hour >= uservariables['sleepTimeStartHour'] or time.hour < uservariables['sleepTimeStopHour']
 
 sUV, sSolar = otherdevices_svalues['UVWeerstation']:match("([^;]+);([^;]+)")
-sUV2 = otherdevices_svalues['UV2Weerstation']
+sUV2 = tonumber(otherdevices_svalues['UV2Weerstation'])
 sunisdark = sUV2 < uservariables['minSunlight']
 
 --sleeptime = true
