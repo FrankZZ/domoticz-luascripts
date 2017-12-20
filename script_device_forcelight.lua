@@ -11,6 +11,14 @@ for deviceName,deviceValue in pairs(devicechanged) do
             print ('[' .. name .. '] Forcing off...')
             commandArray['Group:' .. name .. 'Regular'] = 'Off'
         end
+    elseif (type == 'Buttn' and deviceValue == 'On') then
+        if(otherdevices[name .. 'Force'] == 'On') then
+            print ('[' .. name .. '] Button press, Forcing on...')
+            commandArray['Group:' .. name .. 'Regular'] = 'On'
+        else
+            print ('[' .. name .. '] Button pressed again, Forcing off...')
+            commandArray[name .. 'Force'] = 'Off'
+        end
     end
 end
 
